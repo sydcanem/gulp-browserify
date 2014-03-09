@@ -2,6 +2,7 @@ var gulp = require( 'gulp' );
 var browserify = require( 'gulp-browserify' );
 var concat = require( 'gulp-concat' );
 var less = require( 'gulp-less' );
+var argv = require( 'yargs' ).argv;
 
 // Source files
 var scripts = 'public/main.js';
@@ -17,7 +18,7 @@ gulp.task('styles', function() {
 gulp.task('scripts', function() {
 	gulp.src(scripts)
 		.pipe(browserify({
-			debug: !gulp.env.production
+			debug: !!argv.debug				// source maps ON
 		}))
 		.pipe(concat('main.min.js'))
 		.pipe(gulp.dest('public'));
